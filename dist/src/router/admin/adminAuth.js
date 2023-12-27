@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const adminController_1 = require("../../controller/adminController");
+const userValidation_1 = require("../../middleware/validator/userValidation/userValidation");
+const adminAuthRoutes = (0, express_1.Router)();
+adminAuthRoutes.post("/login", userValidation_1.loginValidation, adminController_1.adminSignin);
+adminAuthRoutes.post("/register", userValidation_1.registerValidation, adminController_1.adminSignup);
+adminAuthRoutes.get("/", adminController_1.getAllAdmin);
+adminAuthRoutes.get("/:adminId", adminController_1.getOneAdmin);
+adminAuthRoutes.get("/:adminId/verify", adminController_1.verifyUser);
+adminAuthRoutes.patch("/updateadmin/:adminId", adminController_1.updateAdmin);
+exports.default = adminAuthRoutes;
